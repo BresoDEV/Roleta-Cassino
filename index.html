@@ -15,7 +15,7 @@
     }
 
     html {
-        background-color: darkgreen;
+        background: radial-gradient(circle, #ff0000, #520b16);
         font-size: large;
     }
 
@@ -24,18 +24,22 @@
         color: brown;
         background-color: antiquewhite;
         border: none;
-        width: 100%;
+        width: 80%;
     }
 
     td {
         background-color: aliceblue;
         border: none;
+        min-width: 20%;
+        min-height: 20%;
+        max-width: 20%;
+        max-height: 20%;
     }
 
     .info {
         font-size: 150%;
         background-color: darkgreen;
-        color: yellow;
+        color: rgb(255, 255, 255);
     }
 
     button {
@@ -63,8 +67,10 @@
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
 
-    table{
+    table {
         border: 3px solid white;
+        width: 50%;
+        text-align: center;
     }
 </style>
 
@@ -100,21 +106,16 @@
         <button id="aumentarAposta" class="button2">+</button>
     </center>
 </body>
-<?php
-
-if (isset($_GET['cred'])) {
-    file_put_contents('valor.txt', $_GET['cred']);
-}
-
-
-if (file_exists('valor.txt'))
-    $cred = file_get_contents('valor.txt');
-else
-    $cred = 0;
-?>
 <script>
 
+    var min = localStorage.getItem('min') ?? 0;
+    var max = localStorage.getItem('max') ?? 13;
 
+    localStorage.setItem('min', min)
+    localStorage.setItem('max', max)
+
+    console.log('Min: ' + min)
+    console.log('Max: ' + max)
 
     const um = document.getElementById('1');
     const dois = document.getElementById('2');
@@ -138,7 +139,12 @@ else
     const textoaposta = document.getElementById('textoaposta');
 
 
-    var creditos = <?php echo $cred; ?>;
+    if (!localStorage.getItem('creditos')) {
+        localStorage.setItem('creditos', 0)
+    }
+
+    var creditos = localStorage.getItem('creditos');
+
     var apostaAtual = valorAposta.value;
     valorAposta.max = creditos;
 
@@ -158,41 +164,17 @@ else
         '&#127821',
         '&#127811',];
 
-    <?php
-    if (isset($_GET['_9'])) {
-        echo '
-        um.innerHTML =      "' . $_GET['_1'] . '";;
-		dois.innerHTML =    "' . $_GET['_2'] . '";;
-		tres.innerHTML =    "' . $_GET['_3'] . '";;
-        quatro.innerHTML =  "' . $_GET['_4'] . '";;
-	    cinco.innerHTML =   "' . $_GET['_5'] . '";;
-	    seis.innerHTML =    "' . $_GET['_6'] . '";;
-	    sete.innerHTML =    "' . $_GET['_7'] . '";;
-	    oito.innerHTML =    "' . $_GET['_8'] . '";;
-	    nove.innerHTML =    "' . $_GET['_9'] . '";;
-        ';
-    } else {
-        echo '
-        um.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-		dois.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-		tres.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-        quatro.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-	    cinco.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-	    seis.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-	    sete.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-	    oito.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-	    nove.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-        ';
-    }
-    ?>
 
 
-
-
-
-
-   
-    //--------------
+    um.innerHTML = localStorage.getItem('_1') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
+    dois.innerHTML = localStorage.getItem('_2') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
+    tres.innerHTML = localStorage.getItem('_3') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
+    quatro.innerHTML = localStorage.getItem('_4') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
+    cinco.innerHTML = localStorage.getItem('_5') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
+    seis.innerHTML = localStorage.getItem('_6') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
+    sete.innerHTML = localStorage.getItem('_7') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
+    oito.innerHTML = localStorage.getItem('_8') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
+    nove.innerHTML = localStorage.getItem('_9') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
 
     function NumeroAleatorio(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -203,16 +185,15 @@ else
 
     girar.addEventListener('click', () => {
 
-        if (creditos === 0) {
-            window.location.href = 'add.php';
+        if (creditos == 0) {
+            window.location.href = 'add.html';
         }
 
-        console.log(numeros.length-1)
+        console.log(numeros.length - 1)
 
-        var min = 0;//numero minimo da jogada
-        var max = numeros.length - 1;//numero maximo da jogada
+
         loop = setInterval(() => {
-            bbbb(min,max);
+            bbbb(parseInt(localStorage.getItem('min')), parseInt(localStorage.getItem('max')));
         }, vel);
 
         creditos -= apostaAtual;
@@ -243,15 +224,15 @@ else
         vel += 1;
         if (vel === 100) {
             //ultima jogada
-            um.innerHTML =      numeros[NumeroAleatorio(Min, Max)];
-            dois.innerHTML =    numeros[NumeroAleatorio(Min, Max)];
-            tres.innerHTML =    numeros[NumeroAleatorio(Min, Max)];
-            quatro.innerHTML =  numeros[NumeroAleatorio(Min, Max)];
-            cinco.innerHTML =   numeros[NumeroAleatorio(Min, Max)];
-            seis.innerHTML =    numeros[NumeroAleatorio(Min, Max)];
-            sete.innerHTML =    numeros[NumeroAleatorio(Min, Max)];
-            oito.innerHTML =    numeros[NumeroAleatorio(Min, Max)];
-            nove.innerHTML =    numeros[NumeroAleatorio(Min, Max)];
+            um.innerHTML = numeros[NumeroAleatorio(Min, Max)];
+            dois.innerHTML = numeros[NumeroAleatorio(Min, Max)];
+            tres.innerHTML = numeros[NumeroAleatorio(Min, Max)];
+            quatro.innerHTML = numeros[NumeroAleatorio(Min, Max)];
+            cinco.innerHTML = numeros[NumeroAleatorio(Min, Max)];
+            seis.innerHTML = numeros[NumeroAleatorio(Min, Max)];
+            sete.innerHTML = numeros[NumeroAleatorio(Min, Max)];
+            oito.innerHTML = numeros[NumeroAleatorio(Min, Max)];
+            nove.innerHTML = numeros[NumeroAleatorio(Min, Max)];
             //-------------
             clearInterval(loop);
             vel = 1;
@@ -263,8 +244,8 @@ else
         else {
             clearInterval(loop);
             loop = setInterval(() => {
-               // bbbb(umin_, dmin_, tmin_, umax_, dmax_, tmax_)
-                bbbb(Min,Max)
+                // bbbb(umin_, dmin_, tmin_, umax_, dmax_, tmax_)
+                bbbb(Min, Max)
             }, vel);
         }
     }
@@ -340,7 +321,7 @@ else
             creditos += (apostaAtual * 2);
             loopChecks = false;
             vel = 1;
-            
+
             _3_elem.style.backgroundColor = 'red';
             _6_elem.style.backgroundColor = 'red';
             _9_elem.style.backgroundColor = 'red';
@@ -369,7 +350,7 @@ else
             creditos += (apostaAtual * 2);
             loopChecks = false;
             vel = 1;
-            
+
             _3_elem.style.backgroundColor = 'red';
             _5_elem.style.backgroundColor = 'red';
             _7_elem.style.backgroundColor = 'red';
@@ -398,7 +379,7 @@ else
             creditos += (apostaAtual * 2);
             loopChecks = false;
             vel = 1;
-           
+
             _2_elem.style.backgroundColor = 'red';
             _5_elem.style.backgroundColor = 'red';
             _8_elem.style.backgroundColor = 'red';
@@ -414,7 +395,20 @@ else
 
         setTimeout(() => {
             //salva creditos
-            window.location.href = 'rodar2.php?cred=' + creditos +
+            localStorage.setItem('_1', _1);
+            localStorage.setItem('_2', _2);
+            localStorage.setItem('_3', _3);
+            localStorage.setItem('_4', _4);
+            localStorage.setItem('_5', _5);
+            localStorage.setItem('_6', _6);
+            localStorage.setItem('_7', _7);
+            localStorage.setItem('_8', _8);
+            localStorage.setItem('_9', _9);
+
+
+            localStorage.setItem('creditos', creditos)
+
+            window.location.href = 'index.html?cred=' + creditos +
                 '&_1=' + _1 +
                 '&_2=' + _2 +
                 '&_3=' + _3 +
@@ -424,6 +418,7 @@ else
                 '&_7=' + _7 +
                 '&_8=' + _8 +
                 '&_9=' + _9;
+
 
         }, 3000);
 
@@ -451,8 +446,19 @@ else
             aumentarAposta.style.display = 'none';
             valorAposta.style.display = 'none';
             textoaposta.style.display = 'none';
+
+            um.innerHTML =  numeros[NumeroAleatorio(0, numeros.length - 1)];
+            dois.innerHTML =  numeros[NumeroAleatorio(0, numeros.length - 1)];
+            tres.innerHTML =  numeros[NumeroAleatorio(0, numeros.length - 1)];
+            quatro.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
+            cinco.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
+            seis.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
+            sete.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
+            oito.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
+            nove.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
+
         }
-    }, 1);
+    }, 500);
 
 
     diminuirAposta.addEventListener('click', () => {
@@ -468,8 +474,6 @@ else
     valorAposta.addEventListener('change', () => {
         apostaAtual = valorAposta.value;
     });
-
-
 
 
 </script>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+
+    }
+
+    html {
+        background: radial-gradient(circle,#ff0000,#520b16);
+    }
+
+    span {
+        font-size: 500%;
+        color: brown;
+        background-color: antiquewhite;
+        border: 1px solid black;
+        min-width: 100px;
+        max-width: 100px;
+        min-height: 100px;
+        max-height: 100px;
+    }
+
+    .info {
+        font-size: 250%;
+        background-color: darkgreen;
+        color: rgb(255, 255, 255);
+    }
+
+    button,
+    input {
+        background-color: rgb(100, 200, 100);
+        color: black;
+        width: 50%;
+        text-align: center;
+        padding: 10px;
+        font-size: 200%;
+        border: none;
+        border-radius: 10px;
+        margin-top: 10px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+</style>
+
+<body>
+
+    <center>
+
+        <br>
+        <hr>
+        <button id="Voltar">Voltar</button><br><br>
+        <button id="Resetar">Resetar</button><br><br>
+        <br>
+        <input type="text" id="valorsetMin">
+        <button id="setMin">Setar Min <br>(min 0)</button><br><br>
+
+        <hr><br>
+        <input type="text" id="valorsetMax">
+        <button id="setMax">Setar Max <br>(max 13)</button><br><br>
+        <hr>
+    </center>
+</body>
+<script>
+
+    document.getElementById('valorsetMax').value = localStorage.getItem('max') ?? 13;
+    document.getElementById('valorsetMin').value = localStorage.getItem('min') ?? 0;
+
+    document.getElementById('setMax').addEventListener('click', () => {
+        localStorage.setItem('max', parseInt(document.getElementById('valorsetMax').value))
+        //
+    })
+    document.getElementById('setMin').addEventListener('click', () => {
+        localStorage.setItem('min', parseInt(document.getElementById('valorsetMin').value))
+        //
+    })
+    document.getElementById('Voltar').addEventListener('click', () => {
+        window.location.href = 'add.html';
+    })
+
+    document.getElementById('Resetar').addEventListener('click', () => {
+        localStorage.clear()
+        window.location.reload();
+    })
+
+
+
+</script>
+
+</html>
