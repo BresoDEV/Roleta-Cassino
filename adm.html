@@ -39,10 +39,10 @@
     input {
         background-color: rgb(100, 200, 100);
         color: black;
-        width: 50%;
+        width: 75%;
         text-align: center;
         padding: 10px;
-        font-size: 200%;
+        font-size: 100%;
         border: none;
         border-radius: 10px;
         margin-top: 10px;
@@ -60,11 +60,16 @@
         <button id="Resetar">Resetar</button><br><br>
         <br>
         <input type="text" id="valorsetMin">
-        <button id="setMin">Setar Min <br>(min 0)</button><br><br>
+        <button id="setMin">Setar Min (min 0)</button><br><br>
 
         <hr><br>
         <input type="text" id="valorsetMax">
-        <button id="setMax">Setar Max <br>(max 13)</button><br><br>
+        <button id="setMax">Setar Max (max 13)</button><br><br>
+        <hr>
+
+        <hr><br>
+        <input type="text" id="grana">
+        <button id="setgrana">Set Grana</button><br><br>
         <hr>
     </center>
 </body>
@@ -72,7 +77,12 @@
 
     document.getElementById('valorsetMax').value = localStorage.getItem('max') ?? 13;
     document.getElementById('valorsetMin').value = localStorage.getItem('min') ?? 0;
+    document.getElementById('grana').value = localStorage.getItem('creditos') ?? 0;
 
+    document.getElementById('setgrana').addEventListener('click', () => {
+        localStorage.setItem('creditos', parseInt(document.getElementById('grana').value))
+        //
+    }) 
     document.getElementById('setMax').addEventListener('click', () => {
         localStorage.setItem('max', parseInt(document.getElementById('valorsetMax').value))
         //
