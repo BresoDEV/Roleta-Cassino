@@ -1,481 +1,298 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Caça Níquel Responsivo</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            
+            align-items: center;
+            height: 100vh;
+            background-color: #3c9559;
+            margin: 0; 
+            margin-top: 50px;
+            font-family: Arial, sans-serif;
+            color: #ecf0f1;
+        }
+
+        .slot-machine-container {
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #34495e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+             
+            user-select: none;
+        }
+
+        .money-display {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .slot-machine {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 10px;
+            width: 80vw;
+            max-width: 500px;
+            height: 90vw;
+            max-height: 500px;
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .slot {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: green;
+            color: #fff;
+            font-size: 400%;
+            border-radius: 5px;
+            height: 100%;
+            width: 100%;
+        }
+
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .controls input {
+            padding: 10px;
+            font-size: 300%;
+            border: none;
+            border-radius: 5px;
+            width: 100px;
+            text-align: center;
+        }
+
+        .controls button {
+            padding: 10px 20px;
+            font-size: 300%;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .controls button:hover {
+            background-color: #c0392b;
+        }
+    </style>
 </head>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-
-    }
-
-    html {
-        background: radial-gradient(circle, #ff0000, #520b16);
-        font-size: large;
-    }
-
-    span {
-        font-size: 300%;
-        color: brown;
-        background-color: antiquewhite;
-        border: none;
-        width: 80%;
-    }
-
-    td {
-        background-color: aliceblue;
-        border: none;
-        min-width: 20%;
-        min-height: 20%;
-        max-width: 20%;
-        max-height: 20%;
-    }
-
-    .info {
-        font-size: 150%;
-        background-color: darkgreen;
-        color: rgb(255, 255, 255);
-    }
-
-    button {
-        background-color: rgb(100, 200, 100);
-        color: black;
-        width: 50%;
-        padding: 10px;
-        font-size: 100%;
-        border: none;
-        border-radius: 10px;
-        margin-top: 10px;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    }
-
-    .button2 {
-        text-align: center;
-        background-color: rgb(100, 200, 100);
-        color: black;
-        width: 10%;
-        padding: 3px;
-        font-size: 200%;
-        border: none;
-        border-radius: 10px;
-        margin-top: 10px;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    }
-
-    table {
-        border: 3px solid white;
-        width: 50%;
-        text-align: center;
-    }
-</style>
 
 <body>
+
     <center>
-        <h3 id="info" class="info"></h3><br>
+        <div class="slot-machine-container">
+            <div class="money-display">
 
-        <table>
-            <tr>
-                <td><span id="1">0</span></td>
-                <td><span id="2">0</span></td>
-                <td><span id="3">0</span></td>
-            </tr>
-            <tr>
-                <td><span id="4">0</span></td>
-                <td><span id="5">0</span></td>
-                <td><span id="6">0</span></td>
-            </tr>
-            <tr>
-                <td><span id="7">0</span></td>
-                <td><span id="8">0</span></td>
-                <td><span id="9">0</span></td>
-            </tr>
-        </table>
+                Dinheiro Atual:<br>R$ <span id="money-amount">1000</span>.00
 
-
-        <button id="girar">Girar</button><br><br>
-
-
-        <h1 class="info" id="textoaposta">Valor da Aposta:</h1>
-        <button id="diminuirAposta" class="button2">-</button>
-        <input type="number" id='valorAposta' class="button2" min="1" value="1" readonly>
-        <button id="aumentarAposta" class="button2">+</button>
+            </div>
+            <div class="slot-machine">
+                <div class="slot" id="slot_1"></div>
+                <div class="slot" id="slot_2"></div>
+                <div class="slot" id="slot_3"></div>
+                <div class="slot" id="slot_4"></div>
+                <div class="slot" id="slot_5"></div>
+                <div class="slot" id="slot_6"></div>
+                <div class="slot" id="slot_7"></div>
+                <div class="slot" id="slot_8"></div>
+                <div class="slot" id="slot_9"></div>
+            </div>
+            <div class="controls">
+                <input type="number" id="bet-amount" value="10" placeholder="Aposta" min="1" max="100">
+                <button onclick="spin()">Girar</button>
+            </div>
+        </div>
     </center>
+
+    <script>
+
+        
+
+        var rodadaFinal = 8;
+        /*
+        Valores de 0 a 8
+        0=mais chance de ganhar. 
+        8=menos chances
+        */
+
+
+        var dinheiro = 0;
+        var apostaAtual = 0;
+
+
+        if (localStorage.getItem('whiteJackDinheiro')) {
+            dinheiro = parseInt(localStorage.getItem('whiteJackDinheiro'))
+        }
+        localStorage.setItem('whiteJackDinheiro', dinheiro)
+
+
+        var arrayFrutas = [
+            '&#127822;',
+            '&#127818;',
+            '&#127819;',
+            '&#127826;',
+            '&#127827;',
+            '&#127824;',
+            '&#127814;',
+            '&#127821;',
+            '&#127817;',
+        ]
+
+        var slots = []
+
+        for (let i = 0; i < 10; i++) {
+            if (document.getElementById('slot_' + i)) {
+                slots.push(document.getElementById('slot_' + i))
+            }
+        }
+
+
+        setInterval(() => {
+            apostaAtual = parseInt(document.getElementById('bet-amount').value)
+            document.getElementById('money-amount').textContent = localStorage.getItem('whiteJackDinheiro');
+        }, 1);
+
+        function randomizar(chance = 8) {
+            slots.forEach(e => {
+                var r = Math.floor(Math.random() * chance)
+                e.innerHTML = arrayFrutas[r]
+            });
+        }
+        randomizar()
+
+
+        function verSeGanhou() {
+
+            if (verificarSlots(1, 2, 3)) {
+                marcouPonto();
+            }
+            if (verificarSlots(4, 5, 6)) {
+                marcouPonto();
+            }
+            if (verificarSlots(7, 8, 9)) {
+                marcouPonto();
+            }
+            if (verificarSlots(1, 5, 9)) {
+                marcouPonto();
+            }
+            if (verificarSlots(7, 5, 3)) {
+                marcouPonto();
+            }
+
+            if (verificarSlots(1, 4, 7)) {
+                marcouPonto();
+            }
+            if (verificarSlots(2, 5, 8)) {
+                marcouPonto();
+            }
+            if (verificarSlots(3, 6, 9)) {
+                marcouPonto();
+            }
+
+            console.log('dinheiro: ' + dinheiro)
+            console.log('apostaAtual: ' + apostaAtual)
+            // dinheiro += premio;
+            // premio = 0;
+
+        }
+
+
+        function verificarSlots(a, b, c) {
+            if (valorSlot(a) == valorSlot(b) && valorSlot(a) == valorSlot(c)) {
+
+                slots[a - 1].style.backgroundColor = 'cyan'
+                slots[b - 1].style.backgroundColor = 'cyan'
+                slots[c - 1].style.backgroundColor = 'cyan'
+                console.log('marcou ponto')
+                return true
+
+            } else {
+
+                return false
+            }
+        }
+
+
+        function marcouPonto() {
+            dinheiro += apostaAtual * 2;
+            localStorage.setItem('whiteJackDinheiro', dinheiro)
+        }
+
+        function valorSlot(i) {
+            return slots[i - 1].innerHTML;
+        }
+
+
+        setInterval(() => {
+            if (dinheiro <= 0)
+                randomizar()
+        }, 1000);
+
+
+        function spin() {
+
+            slots.forEach(e => {
+                e.style.backgroundColor = 'green'
+            });
+			if(apostaAtual == 666){
+			localStorage.setItem('whiteJackDinheiro', 100)
+			}
+
+            if (apostaAtual > 0 && apostaAtual <= dinheiro) {
+                // Placeholder para lógica de girar os slots
+                dinheiro -= apostaAtual;
+                localStorage.setItem('whiteJackDinheiro', dinheiro)
+
+
+
+                function mf() {
+
+                    var contador = 1;
+                    function rodar() {
+                        randomizar()
+                        if (contador >= 250) {
+                            randomizar(rodadaFinal)
+                            verSeGanhou()
+                            dinheiro = parseInt(localStorage.getItem('whiteJackDinheiro'))
+                            document.getElementById('money-amount').textContent = dinheiro;
+                            return
+                        }
+
+                        setTimeout(rodar, contador);
+                        contador += 5
+                    }
+                    rodar();
+                }
+                mf()
+
+
+
+
+
+
+
+            } 
+        }
+    </script>
 </body>
-<script>
-
-    var min = localStorage.getItem('min') ?? 0;
-    var max = localStorage.getItem('max') ?? 13;
-
-    localStorage.setItem('min', min)
-    localStorage.setItem('max', max)
-
-    console.log('Min: ' + min)
-    console.log('Max: ' + max)
-
-    const um = document.getElementById('1');
-    const dois = document.getElementById('2');
-    const tres = document.getElementById('3');
-
-    const quatro = document.getElementById('4');
-    const cinco = document.getElementById('5');
-    const seis = document.getElementById('6');
-
-    const sete = document.getElementById('7');
-    const oito = document.getElementById('8');
-    const nove = document.getElementById('9');
-
-    const girar = document.getElementById('girar');
-    const info = document.getElementById('info');
-
-
-    const diminuirAposta = document.getElementById('diminuirAposta');
-    const aumentarAposta = document.getElementById('aumentarAposta');
-    const valorAposta = document.getElementById('valorAposta');
-    const textoaposta = document.getElementById('textoaposta');
-
-
-    if (!localStorage.getItem('creditos')) {
-        localStorage.setItem('creditos', 0)
-    }
-
-    var creditos = localStorage.getItem('creditos');
-
-    var apostaAtual = valorAposta.value;
-    valorAposta.max = creditos;
-
-    var numeros = [
-        '&#127820',
-        '&#127815',
-        '&#127817',
-        '&#127827',
-        '&#127825',
-        '&#127826',
-        '&#127821',
-        '&#127819',
-        '&#127824',
-        '&#127822',
-        '&#127829',
-        '&#127840',
-        '&#127821',
-        '&#127811',];
-
-
-
-    um.innerHTML = localStorage.getItem('_1') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
-    dois.innerHTML = localStorage.getItem('_2') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
-    tres.innerHTML = localStorage.getItem('_3') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
-    quatro.innerHTML = localStorage.getItem('_4') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
-    cinco.innerHTML = localStorage.getItem('_5') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
-    seis.innerHTML = localStorage.getItem('_6') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
-    sete.innerHTML = localStorage.getItem('_7') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
-    oito.innerHTML = localStorage.getItem('_8') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
-    nove.innerHTML = localStorage.getItem('_9') ?? numeros[NumeroAleatorio(0, numeros.length - 1)];
-
-    function NumeroAleatorio(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    let loop;
-    var vel = 1;
-
-    girar.addEventListener('click', () => {
-
-        if (creditos == 0) {
-            window.location.href = 'add.html';
-        }
-
-        console.log(numeros.length - 1)
-
-
-        loop = setInterval(() => {
-            bbbb(parseInt(localStorage.getItem('min')), parseInt(localStorage.getItem('max')));
-        }, vel);
-
-        creditos -= apostaAtual;
-
-
-    });
-
-
-
-
-    function bbbb(
-        Min = 0,
-        Max = numeros.length - 1
-    ) {
-        girar.style.display = 'none';
-
-        um.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-        dois.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-        tres.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-        quatro.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-        cinco.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-        seis.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-        sete.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-        oito.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-        nove.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-
-        //console.log(vel)
-        vel += 1;
-        if (vel === 100) {
-            //ultima jogada
-            um.innerHTML = numeros[NumeroAleatorio(Min, Max)];
-            dois.innerHTML = numeros[NumeroAleatorio(Min, Max)];
-            tres.innerHTML = numeros[NumeroAleatorio(Min, Max)];
-            quatro.innerHTML = numeros[NumeroAleatorio(Min, Max)];
-            cinco.innerHTML = numeros[NumeroAleatorio(Min, Max)];
-            seis.innerHTML = numeros[NumeroAleatorio(Min, Max)];
-            sete.innerHTML = numeros[NumeroAleatorio(Min, Max)];
-            oito.innerHTML = numeros[NumeroAleatorio(Min, Max)];
-            nove.innerHTML = numeros[NumeroAleatorio(Min, Max)];
-            //-------------
-            clearInterval(loop);
-            vel = 1;
-
-            verResultados();
-
-
-        }
-        else {
-            clearInterval(loop);
-            loop = setInterval(() => {
-                // bbbb(umin_, dmin_, tmin_, umax_, dmax_, tmax_)
-                bbbb(Min, Max)
-            }, vel);
-        }
-    }
-
-    function verResultados() {
-
-        var _1_elem = document.getElementById('1');
-        var _2_elem = document.getElementById('2');
-        var _3_elem = document.getElementById('3');
-        var _4_elem = document.getElementById('4');
-        var _5_elem = document.getElementById('5');
-        var _6_elem = document.getElementById('6');
-        var _7_elem = document.getElementById('7');
-        var _8_elem = document.getElementById('8');
-        var _9_elem = document.getElementById('9');
-
-        var _1 = document.getElementById('1').textContent;
-        var _2 = document.getElementById('2').textContent;
-        var _3 = document.getElementById('3').textContent;
-        var _4 = document.getElementById('4').textContent;
-        var _5 = document.getElementById('5').textContent;
-        var _6 = document.getElementById('6').textContent;
-        var _7 = document.getElementById('7').textContent;
-        var _8 = document.getElementById('8').textContent;
-        var _9 = document.getElementById('9').textContent;
-
-        //ooo
-        //xxx
-        //ooo
-        if (_1 === _2 && _1 === _3) {
-            info.textContent = 'Acertou!';
-            creditos += (apostaAtual * 2);
-            loopChecks = false;
-            vel = 1;
-            _1_elem.style.backgroundColor = 'red';
-            _2_elem.style.backgroundColor = 'red';
-            _3_elem.style.backgroundColor = 'red';
-
-        }
-
-
-        //xoo
-        //xoo
-        //xoo
-        if (_1 === _4 && _1 === _7) {
-            info.textContent = 'Acertou!';
-            creditos += (apostaAtual * 2);
-            loopChecks = false;
-            vel = 1;
-            _1_elem.style.backgroundColor = 'red';
-            _4_elem.style.backgroundColor = 'red';
-            _7_elem.style.backgroundColor = 'red';
-        }
-
-        //ooo
-        //ooo
-        //xxx
-        if (_7 === _8 && _7 === _9) {
-            info.textContent = 'Acertou!';
-            creditos += (apostaAtual * 2);
-            loopChecks = false;
-            vel = 1;
-            _7_elem.style.backgroundColor = 'red';
-            _8_elem.style.backgroundColor = 'red';
-            _9_elem.style.backgroundColor = 'red';
-        }
-
-        //oox
-        //oox
-        //oox
-        if (_9 === _3 && _3 === _6) {
-            info.textContent = 'Acertou!';
-            creditos += (apostaAtual * 2);
-            loopChecks = false;
-            vel = 1;
-
-            _3_elem.style.backgroundColor = 'red';
-            _6_elem.style.backgroundColor = 'red';
-            _9_elem.style.backgroundColor = 'red';
-        }
-
-        //xxx
-        //ooo
-        //ooo
-        if (_1 === _2 && _1 === _3) {
-            info.textContent = 'Acertou!';
-            creditos += (apostaAtual * 2);
-            loopChecks = false;
-            vel = 1;
-            _1_elem.style.backgroundColor = 'red';
-            _2_elem.style.backgroundColor = 'red';
-            _3_elem.style.backgroundColor = 'red';
-        }
-
-
-
-        //oox
-        //oxo
-        //xoo
-        if (_3 === _5 && _3 === _7) {
-            info.textContent = 'Acertou!';
-            creditos += (apostaAtual * 2);
-            loopChecks = false;
-            vel = 1;
-
-            _3_elem.style.backgroundColor = 'red';
-            _5_elem.style.backgroundColor = 'red';
-            _7_elem.style.backgroundColor = 'red';
-        }
-
-
-        //xoo
-        //oxo
-        //oox
-        if (_1 === _5 && _1 === _9) {
-            info.textContent = 'Acertou!';
-            creditos += (apostaAtual * 2);
-            loopChecks = false;
-            vel = 1;
-            _1_elem.style.backgroundColor = 'red';
-            _5_elem.style.backgroundColor = 'red';
-            _9_elem.style.backgroundColor = 'red';
-        }
-
-
-        //oxo
-        //oxo
-        //oxo
-        if (_2 === _5 && _2 === _8) {
-            info.textContent = 'Acertou!';
-            creditos += (apostaAtual * 2);
-            loopChecks = false;
-            vel = 1;
-
-            _2_elem.style.backgroundColor = 'red';
-            _5_elem.style.backgroundColor = 'red';
-            _8_elem.style.backgroundColor = 'red';
-        }
-
-        //----------------------Premios Maiores-------------------------
-
-
-
-
-
-
-
-        setTimeout(() => {
-            //salva creditos
-            localStorage.setItem('_1', _1);
-            localStorage.setItem('_2', _2);
-            localStorage.setItem('_3', _3);
-            localStorage.setItem('_4', _4);
-            localStorage.setItem('_5', _5);
-            localStorage.setItem('_6', _6);
-            localStorage.setItem('_7', _7);
-            localStorage.setItem('_8', _8);
-            localStorage.setItem('_9', _9);
-
-
-            localStorage.setItem('creditos', creditos)
-
-            window.location.href = 'index.html?cred=' + creditos +
-                '&_1=' + _1 +
-                '&_2=' + _2 +
-                '&_3=' + _3 +
-                '&_4=' + _4 +
-                '&_5=' + _5 +
-                '&_6=' + _6 +
-                '&_7=' + _7 +
-                '&_8=' + _8 +
-                '&_9=' + _9;
-
-
-        }, 3000);
-
-
-    }
-
-
-
-    setInterval(() => {
-
-        apostaAtual = valorAposta.value;
-        valorAposta.max = creditos;
-
-
-        //console.log(apostaAtual)
-
-        if (creditos > 0) {
-            info.innerHTML = 'Creditos: R$ ' + creditos + '.00';
-            girar.innerHTML = 'Jogar';
-        }
-        else {
-            info.innerHTML = '<font color="red">Sem Creditos</font>';
-            girar.innerHTML = 'Adicionar Creditos';
-            diminuirAposta.style.display = 'none';
-            aumentarAposta.style.display = 'none';
-            valorAposta.style.display = 'none';
-            textoaposta.style.display = 'none';
-
-            um.innerHTML =  numeros[NumeroAleatorio(0, numeros.length - 1)];
-            dois.innerHTML =  numeros[NumeroAleatorio(0, numeros.length - 1)];
-            tres.innerHTML =  numeros[NumeroAleatorio(0, numeros.length - 1)];
-            quatro.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-            cinco.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-            seis.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-            sete.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-            oito.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-            nove.innerHTML = numeros[NumeroAleatorio(0, numeros.length - 1)];
-
-        }
-    }, 500);
-
-
-    diminuirAposta.addEventListener('click', () => {
-        if (apostaAtual > 1)
-            valorAposta.value--;
-
-    });
-
-    aumentarAposta.addEventListener('click', () => {
-        if (apostaAtual !== valorAposta.max)
-            valorAposta.value++;
-    });
-    valorAposta.addEventListener('change', () => {
-        apostaAtual = valorAposta.value;
-    });
-
-
-</script>
 
 </html>
